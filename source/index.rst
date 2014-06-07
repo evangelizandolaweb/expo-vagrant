@@ -34,7 +34,7 @@ Ejemplos
 ========
 
 ===============     =============
-Proyecto A          Output
+Proyecto A          Proyecto B
 ---------------     -------------
 PHP 5.3             PHP 5.4  
 MySQL 5             MongoDB 2.6
@@ -75,13 +75,13 @@ Tiempo de tarea
 .. slide:: Como lo Instalamos
     :level: 2
 
-    .. code-block:: enlace de descarga
+    Enlace de descarga ::
 
         http://downloads.vagrantup.com/
 
     Vagrant usa como dependencia un virtualizador de software (virtualbox)
 
-    .. code-block::
+    ::
 
         https://www.virtualbox.org/
 
@@ -90,7 +90,7 @@ Tiempo de tarea
 
     * Crear el VagrantFile (Describe los recursos, tipo de Maquina y Software que vamos a usar)
 
-    .. code-block::
+     shell ::
 
         mkdir test-vagrant
         cd test-vagrant
@@ -101,31 +101,31 @@ Tiempo de tarea
 
     Es la imagen del sistema operativo que usaremos.
 
-    podemos descargar de este enlace:
+    Podemos descargar de este enlace ::
 
-    .. code-block::
         http://www.vagrantbox.es/
 
-     como somos amantes de **debian** usaremos algo parecido ubuntu
+    como somos amantes de **debian** usaremos algo parecido ubuntu
 
-     .. code-block::
+
+    ::
 
         http://files.vagrantup.com/precise32.box
 
 .. slide:: Agregamos el Box
     :level: 2
 
-    .. code-block::
+    ::
 
          vagrant box add nombre_del_box http://url_del_box.box
 
-    .. code-block::
+    ::
 
          vagrant box add precise32 http://files.vagrantup.com/precise32.box
 
     **comprobemos**
 
-    .. code-block::
+    ::
 
          vagrant box list
 
@@ -136,13 +136,13 @@ Tiempo de tarea
 
     busquemos:
     
-    .. code-block::
+    ::
 
         config.vm.box = "base"
 
     y lo cambiamos por:
         
-    .. code-block::
+    ::
 
         config.vm.box = "precise32"
         
@@ -152,13 +152,13 @@ Tiempo de tarea
 
     **Ahora si preparados**
 
-    .. code-block::
+    ::
 
         vagrant up
 
     ahora para instalar las dependencias es:
         
-    .. code-block::
+    ::
 
         vagrant ssh
         
@@ -166,7 +166,7 @@ Tiempo de tarea
 .. slide:: Ejemplo de instalar Git
     :level: 2
 
-    .. code-block::
+    ::
 
         vagrant ssh
         sudo apt-get update
@@ -193,7 +193,7 @@ Tiempo de tarea
 .. slide:: Comandos de Vagrant
     :level: 2
 
-    .. code-block::
+    ::
 
         vagrant up
         vagrant init
@@ -213,7 +213,7 @@ Tiempo de tarea
 .. slide:: Configuracion network
     :level: 2
 
-    .. code-block::
+    ::
 
          guest_config.vm.network :private_network, ip: "192.168.33.10"
          guest_config.vm.network "public_network"
@@ -221,7 +221,7 @@ Tiempo de tarea
 .. slide:: Enrutamiento de Puertos
     :level: 2
 
-    .. code-block::
+    .. code-block:: ruby
 
          guest_config.vm.network :forwarded_port, guest: 80, host: 8888, auto_correct: true
          guest_config.vm.network :forwarded_port, guest: 3306, host: 8889, auto_correct: true
@@ -230,7 +230,8 @@ Tiempo de tarea
 .. slide:: Configuracion de Pc
     :level: 2
 
-    .. code-block::
+    .. code-block:: ruby
+
          guest_config.vm.hostname = "guest"
          guest_config.vm.provider :virtualbox do |v|
              v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -240,13 +241,15 @@ Tiempo de tarea
 .. slide:: Sincronizacion de Carpetas con NFS
     :level: 2
 
-    .. code-block::
+    .. code-block:: ruby
+
         guest_config.vm.synced_folder "./", "/var/www", {:mount_options => ['dmode=777','fmode=777']}
 
 .. slide:: Exportar el Box
     :level: 2
 
-    .. code-block::
+    ::
+
        vagrant up
        (setup)
        vagrant halt
@@ -272,13 +275,13 @@ Tiempo de tarea
 .. slide:: Usando Puppet
     :level: 2
 
-    .. code-block::
+    .. code-block:: ruby
 
-    guest_config.vm.provision :puppet do |puppet|
-        puppet.manifests_path = "provision/puppet/manifests"
-        puppet.manifest_file  = "init.pp"
-        puppet.module_path = "provision/puppet/modules"
-    end
+        guest_config.vm.provision :puppet do |puppet|
+            puppet.manifests_path = "provision/puppet/manifests"
+            puppet.manifest_file  = "init.pp"
+            puppet.module_path = "provision/puppet/modules"
+        end
 
 .. slide:: Demo
     :level: 1
@@ -286,5 +289,4 @@ Tiempo de tarea
 .. slide:: Vagrant halt
     :level: 2
 
-    Preguntas?
-    ----------
+    **Preguntas**
