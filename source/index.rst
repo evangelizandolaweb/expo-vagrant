@@ -1,9 +1,7 @@
 
 Usando Vagrant
 ==============
-.. image:: ./_static/images/slides/upload_image.png
-            :width: 80%
-            :align: center
+
 
 About Me
 ========
